@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raja — Personal Space</title>
+<meta name="description" content="রাজার নিজের স্পেস — ডিজাইন, কোড আর আইডিয়া।">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b14;
+    --text:#eef2ff;
+    --muted:#93a0bd;
+    --line:rgba(255,255,255,.09);
+    --card:rgba(255,255,255,.045);
+    --accent:#6ee7ff;
+    --accent2:#a78bfa;
+    --accent3:#fb7185;
+    --radius:20px;
+  }
+  html[data-theme="light"]{
+    --bg:#f4f6fb;
+    --text:#0b1220;
+    --muted:#55617a;
+    --line:rgba(10,20,40,.10);
+    --card:rgba(255,255,255,.75);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hind Siliguri','Space Grotesk',system-ui,sans-serif;
+    background:var(--bg);color:var(--text);
+    min-height:100vh;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition:background .45s ease,color .45s ease;
+  }
+  .aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:float 18s ease-in-out infinite}
+  .b1{width:46vw;height:46vw;background:var(--accent2);top:-14vw;left:-10vw}
+  .b2{width:40vw;height:40vw;background:var(--accent);bottom:-16vw;right:-8vw;animation-delay:-6s}
+  .b3{width:30vw;height:30vw;background:var(--accent3);top:38%;left:52%;opacity:.32;animation-delay:-11s}
+  @keyframes float{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(4vw,-4vh,0) scale(1.12)}
+  }
+  html[data-theme="light"] .blob{opacity:.35}
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+    background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+    background-size:3px 3px}
+  html[data-theme="light"] .grain{opacity:.5;background-image:radial-gradient(rgba(10,20,40,.07) 1px,transparent 1px)}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);
+    background:color-mix(in srgb,var(--bg) 72%,transparent);
+    border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.12rem;letter-spacing:.3px}
+  .dot{width:30px;height:30px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:grid;place-items:center;color:#05101f;font-weight:700;font-size:.95rem;
+    box-shadow:0 0 22px rgba(110,231,255,.45)}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .2s}
+  .navlinks a:hover{color:var(--text)}
+  .toggle{border:1px solid var(--line);background:var(--card);color:var(--text);
+    width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:1.05rem;
+    display:grid;place-items:center;transition:transform .25s,border-color .25s}
+  .toggle:hover{transform:rotate(-18deg) scale(1.06);border-color:var(--accent)}
+
+  .hero{padding:88px 0 70px;text-align:center}
+  .pill{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
+    border:1px solid var(--line);background:var(--card);font-size:.83rem;color:var(--muted);
+    margin-bottom:26px;letter-spacing:.4px}
+  .pulse{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.7);
+    animation:pulse 2s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+  h1{font-size:clamp(2.3rem,6.4vw,4.15rem);line-height:1.1;font-weight:700;letter-spacing:-1.4px}
+  .grad{background:linear-gradient(100deg,var(--accent),var(--accent2) 45%,var(--accent3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:220% auto;animation:shine 7s linear infinite}
+  @keyframes shine{to{background-position:220% center}}
+  .sub{max-width:620px;margin:22px auto 0;color:var(--muted);font-size:1.06rem;line-height:1.85}
+  .caret{display:inline-block;width:2px;height:1em;background:var(--accent);
+    vertical-align:-.14em;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .cta{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+  .btn{padding:13px 26px;border-radius:14px;font-weight:600;font-size:.97rem;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;
+    transition:transform .22s,box-shadow .22s,background .22s;display:inline-flex;
+    align-items:center;gap:9px;font-family:inherit}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#05101f;
+    box-shadow:0 10px 30px -8px rgba(110,231,255,.6)}
+  .btn.primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(167,139,250,.7)}
+  .btn.ghost{background:var(--card);border-color:var(--line);color:var(--text)}
+  .btn.ghost:hover{transform:translateY(-3px);border-color:var(--accent)}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px}
+  .stat{padding:26px 18px;border-radius:var(--radius);border:1px solid var(--line);
+    background:var(--card);backdrop-filter:blur(12px);transition:transform .25s,border-color .25s}
+  .stat:hover{transform:translateY(-5px);border-color:var(--accent)}
+  .stat b{display:block;font-size:1.95rem;letter-spacing:-1px;
+    background:linear-gradient(120deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{color:var(--muted);font-size:.87rem;letter-spacing:.3px}
+
+  section{padding:70px 0}
+  .head{margin-bottom:34px}
+  .kicker{color:var(--accent);font-size:.8rem;letter-spacing:2.4px;text-transform:uppercase;
+    font-weight:600;margin-bottom:10px}
+  h2{font-size:clamp(1.6rem,3.6vw,2.3rem);letter-spacing:-.8px;font-weight:700}
+  .head p{color:var(--muted);margin-top:10px;max-width:560px;line-height:1.8}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+  .card{padding:28px 24px;border-radius:var(--radius);border:1px solid var(--line);
+    background:var(--card);backdrop-filter:blur(12px);position:relative;overflow:hidden;
+    transition:transform .3s,border-color .3s}
+  .card::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),
+      rgba(110,231,255,.14),transparent 62%)}
+  .card:hover{transform:translateY(-6px);border-color:rgba(110,231,255,.45)}
+  .card:hover::after{opacity:1}
+  .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.28rem;
+    background:linear-gradient(135deg,rgba(110,231,255,.18),rgba(167,139,250,.18));
+    border:1px solid var(--line);margin-bottom:18px}
+  .card h3{font-size:1.08rem;margin-bottom:9px;font-weight:600}
+  .card p{color:var(--muted);font-size:.92rem;line-height:1.8}
+
+  .contact{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:start}
+  form{display:grid;gap:14px}
+  input,textarea{width:100%;padding:14px 16px;border-radius:13px;font-family:inherit;
+    font-size:.95rem;background:var(--card);border:1px solid var(--line);color:var(--text);
+    outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical}
+  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(110,231,255,.14)}
+  input::placeholder,textarea::placeholder{color:var(--muted);opacity:.75}
+  .info{display:grid;gap:14px}
+  .row{display:flex;gap:13px;align-items:center;padding:15px 17px;border-radius:14px;
+    border:1px solid var(--line);background:var(--card);font-size:.93rem}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;margin-top:40px;
+    color:var(--muted);font-size:.86rem;display:flex;justify-content:space-between;
+    gap:12px;flex-wrap:wrap}
+
+  .toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,140%);
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#05101f;
+    padding:13px 24px;border-radius:14px;font-weight:600;font-size:.92rem;z-index:99;
+    transition:transform .45s cubic-bezier(.2,.9,.2,1);box-shadow:0 16px 40px -12px rgba(0,0,0,.6)}
+  .toast.show{transform:translate(-50%,0)}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:760px){
+    .navlinks{display:none}
+    .stats{grid-template-columns:1fr;gap:12px}
+    .contact{grid-template-columns:1fr}
+    .hero{padding:56px 0 44px}
+    section{padding:52px 0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="aurora"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i></div>
+<div class="grain"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo"><span class="dot">R</span> Raja</div>
+      <div class="navlinks">
+        <a href="#work">কাজ</a>
+        <a href="#about">পরিচিতি</a>
+        <a href="#contact">যোগাযোগ</a>
+        <button class="toggle" id="themeBtn" aria-label="থিম বদলাও">🌙</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="pill"><i class="pulse"></i> সাইট লাইভ — টেস্টিং ভার্সন</div>
+      <h1>হ্যালো, আমি <span class="grad">রাজা</span>।<br><span id="typed"></span><span class="caret"></span></h1>
+      <p class="sub">ডিজাইন, কোড আর আইডিয়া — তিনটাই একসাথে মেশাই। এটা আমার নিজের ছোট্ট স্পেস, যেখানে সহজ জিনিসগুলো সুন্দরভাবে সাজানো থাকে।</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">কাজ দেখো →</a>
+        <a class="btn ghost" href="#contact">কথা বলি</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b data-count="24">0</b><span>প্রজেক্ট শেষ</span></div>
+        <div class="stat"><b data-count="100">0</b><span>পারফরম্যান্স স্কোর</span></div>
+        <div class="stat"><b data-count="3">0</b><span>সেকেন্ডে লোড</span></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="work">
+      <div class="head reveal">
+        <div class="kicker">যা বানাই</div>
+        <h2>তিনটি জিনিস, যেগুলো নিয়ে সবচেয়ে বেশি সময় কাটে</h2>
+        <p>কম কথায়: পরিষ্কার ডিজাইন, দ্রুত কোড, আর এমন ইন্টারফেস যা ব্যবহার করতে আরাম লাগে।</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ico">🎨</div>
+          <h3>ইন্টারফেস ডিজাইন</h3>
+          <p>স্পেসিং, টাইপোগ্রাফি আর রঙ — এগুলো ঠিক থাকলে সাইট নিজে থেকেই বিশ্বাসযোগ্য লাগে।</p>
+        </article>
+        <article class="card reveal">
+          <div class="ico">⚡</div>
+          <h3>ফ্রন্টএন্ড কোড</h3>
+          <p>হালকা HTML, CSS আর JavaScript। কোনো ভারী লাইব্রেরি ছাড়াই দ্রুত লোড হয়।</p>
+        </article>
+        <article class="card reveal">
+          <div class="ico">🧩</div>
+          <h3>ছোট প্রজেক্ট</h3>
+          <p>ল্যান্ডিং পেজ, ড্যাশবোর্ড, টুল — আইডিয়া থেকে লাইভ লিংক পর্যন্ত পুরোটা।</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="head reveal">
+        <div class="kicker">এক নজরে</div>
+        <h2>এই পেজটা কীভাবে বানানো</h2>
+        <p>একটাই ফাইল, কোনো বিল্ড স্টেপ নেই। ভেতরে আছে অরোরা ব্যাকগ্রাউন্ড, স্ক্রল অ্যানিমেশন, টাইপিং ইফেক্ট আর ডার্ক-লাইট মোড — সবই মোবাইল-ফ্রেন্ডলি।</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal"><div class="ico">🌗</div><h3>ডার্ক ও লাইট</h3><p>উপরের বাটনে চাপ দিলে থিম বদলাবে, আর পরের বার খুললে সেটাই মনে থাকবে।</p></article>
+        <article class="card reveal"><div class="ico">📱</div><h3>মোবাইল রেডি</h3><p>ছোট স্ক্রিনে গ্রিড এক কলামে ভাঁজ হয়ে যায়, লেখা পড়তে আরাম লাগে।</p></article>
+        <article class="card reveal"><div class="ico">✨</div><h3>মসৃণ অ্যানিমেশন</h3><p>স্ক্রলে কার্ড নিচ থেকে উঠে আসে, আর মাউস যেখানেই যাক সেখানেই হালকা গ্লো।</p></article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="head reveal">
+        <div class="kicker">যোগাযোগ</div>
+        <h2>একটা লাইন লিখে রাখো</h2>
+      </div>
+      <div class="contact">
+        <form id="msgForm" class="reveal">
+          <input type="text" id="name" placeholder="তোমার নাম" required>
+          <input type="email" id="email" placeholder="ইমেইল" required>
+          <textarea id="text" rows="4" placeholder="কী বলতে চাও?" required></textarea>
+          <button class="btn primary" type="submit">পাঠাও</button>
+        </form>
+        <div class="info reveal">
+          <div class="row"><span>📍</span><span>ঢাকা, বাংলাদেশ</span></div>
+          <div class="row"><span>🕒</span><span>উত্তর: সাধারণত একদিনের মধ্যে</span></div>
+          <div class="row"><span>🚀</span><span>ফর্মটা ডেমো — মেসেজ কোথাও যায় না</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="yr"></span> রাজা — ব্যক্তিগত টেস্ট সাইট</span>
+  <span>বানানো হয়েছে ZYRAXON-Pro দিয়ে</span>
+</footer>
+
+<div class="toast" id="toast">মেসেজ পাঠানো হয়েছে ✓</div>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  const saved = localStorage.getItem('raja-theme');
+  if (saved) { root.dataset.theme = saved; btn.textContent = saved === 'light' ? '☀️' : '🌙'; }
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    btn.textContent = next === 'light' ? '☀️' : '🌙';
+    localStorage.setItem('raja-theme', next);
+  });
+
+  const words = ['ডিজাইন করি।', 'কোড লিখি।', 'আইডিয়া বানাই।'];
+  const target = document.getElementById('typed');
+  let w = 0, c = 0, del = false;
+  (function type() {
+    const word = words[w];
+    target.textContent = word.slice(0, c);
+    if (!del && c < word.length) { c++; setTimeout(type, 85); }
+    else if (!del) { del = true; setTimeout(type, 1400); }
+    else if (c > 0) { c--; setTimeout(type, 40); }
+    else { del = false; w = (w + 1) % words.length; setTimeout(type, 260); }
+  })();
+
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .16 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 90 + 'ms';
+    io.observe(el);
+  });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const end = +el.dataset.count;
+    let n = 0;
+    const step = Math.max(1, Math.round(end / 40));
+    const t = setInterval(() => {
+      n += step;
+      if (n >= end) { n = end; clearInterval(t); }
+      el.textContent = n;
+    }, 28);
+  });
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  const toast = document.getElementById('toast');
+  document.getElementById('msgForm').addEventListener('submit', e => {
+    e.preventDefault();
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
