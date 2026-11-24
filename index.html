@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurora — a test build</title>
+<meta name="description" content="A small, fully working test website built end to end." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10022;</text></svg>" />
+</head>
+<body>
+<div class="mesh" aria-hidden="true">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <span class="mark">&#10022;</span>
+    <span>Aurora</span>
+  </a>
+  <nav class="links">
+    <a href="#work">Work</a>
+    <a href="#play">Play</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+    <span class="icon">&#9680;</span>
+  </button>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <p class="eyebrow"><span class="dot"></span> Live test build &middot; <span id="clock">--:--:--</span></p>
+    <h1>
+      A small page,<br />
+      <em>built to prove it works.</em>
+    </h1>
+    <p class="lede">
+      Every part of this page is real &mdash; the theme switch, the live clock, the
+      counter, the form. Nothing here is a screenshot.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#play">Try the demo</a>
+      <a class="btn ghost" href="#work">What's inside</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong id="statCount">0</strong><span>clicks recorded</span></div>
+      <div class="stat"><strong id="statTime">0.0s</strong><span>page uptime</span></div>
+      <div class="stat"><strong id="statWidth">0px</strong><span>your viewport</span></div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="section-head">
+      <span class="index">01</span>
+      <h2>What's inside</h2>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <h3>Live clock</h3>
+        <p>Ticking every second in your own timezone, rendered by plain JavaScript.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Theme switch</h3>
+        <p>Dark and light palettes with a smooth transition, remembered between visits.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Scroll reveal</h3>
+        <p>Sections fade in as you reach them, using the IntersectionObserver API.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Validated form</h3>
+        <p>A contact form that checks what you type and answers without a server.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="play" class="section play">
+    <div class="section-head">
+      <span class="index">02</span>
+      <h2>Play with it</h2>
+    </div>
+    <div class="play-grid">
+      <div class="panel counter-panel">
+        <p class="panel-label">Counter</p>
+        <div class="counter-value" id="counterValue">0</div>
+        <div class="counter-buttons">
+          <button class="btn small" id="dec" aria-label="Decrease">&minus;</button>
+          <button class="btn small accent" id="inc" aria-label="Increase">+</button>
+          <button class="btn small ghost" id="reset">Reset</button>
+        </div>
+      </div>
+
+      <form class="panel form-panel" id="contactForm" novalidate>
+        <p class="panel-label">Say hello</p>
+        <label>
+          <span>Your name</span>
+          <input type="text" id="name" name="name" placeholder="Rafiq" autocomplete="name" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+        </label>
+        <button class="btn primary full" type="submit">Send</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <h2 class="big-line">That's the whole test.</h2>
+    <p class="lede center">Built, run, checked in a real browser, and published &mdash; start to finish.</p>
+    <a class="btn primary" href="#top">Back to top &uarr;</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>&copy; <span id="year">2026</span> Aurora &mdash; a test build</span>
+  <span class="foot-right">Made with plain HTML, CSS and JavaScript</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
